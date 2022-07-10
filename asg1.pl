@@ -64,6 +64,97 @@ female(mary_louis);
 female(jane_louis);
 female(katie_louis);
 
+parent(fred_smith, tom_smith).
+parent(fred_smith, lisa_smith).
+parent(fred_smith,jane_smith).
+parent(fred_smith,john_smith).
+parent(mary_jones,tom_smith).
+parent(mary_jones,lisa_smith).
+parent(mary_jones,jane_smith).
+parent(mary_jones,john_smith).
+parent(tom_smith, mark_smith).
+parent(tom_smith, freddy_smith).
+parent(tom_smith, joe_smith).
+parent(tom_smith, francis_smith).
+parent(evelyn_harris, mark_smith).
+parent(evelyn_harris, freddy_smith).
+parent(evelyn_harris, joe_smith).
+parent(evelyn_harris, francis_smith).
+parent(mark_smith, martha_smith).
+parent(mark_smith, frederick_smith).
+parent(pam_wilson, martha_smith).
+parent(pam_wilson, frederick_smith).
+parent(freddy_smith, jill_smith).
+parent(freddy_smith, marcus_smith).
+parent(freddy_smith, tim_smith).
+parent(connie_warrick, jill_smith).
+parent(connie_warrick, marcus_smith).
+parent(connie_warrick, tim_smith).
+parent(john_smith, julie_smith).
+parent(john_smith, leslie_smith).
+parent(john_smith, heather_smith).
+parent(john_smith, zach_smith).
+parent(layla_morris, julie_smith).
+parent(layla_morris, leslie_smith).
+parent(layla_morris, heather_smith).
+parent(layla_morris, zach_smith).
+parent(edward_thompson, leonard_thompson).
+parent(edward_thompson, mary_thompson).
+parent(susan_holt, leonard_thompson).
+parent(susan_holt, mary_thompson).
+parent(leonard_thompson, joe_thompson).
+parent(leonard_thompson, catherine_thompson).
+parent(leonard_thompson, john_thompson).
+parent(leonard_thompson, carrie_thompson).
+parent(list_smith, joe_thompson).
+parent(list_smith, catherine_thompson).
+parent(list_smith, john_thompson).
+parent(list_smith, carrie_thompson).
+parent(joe_thompson, lilly_thompson).
+parent(joe_thompson, richard_thompson).
+parent(joe_thompson, marcus_thompson).
+parent(lisa_houser, lilly_thompson).
+parent(lisa_houser, richard_thompson).
+parent(lisa_houser, marcus_thompson).
+parent(jeremiah_leech, arthur_leech).
+parent(sally_swithers, arthur_leech).
+parent(arthur_leech, timothy_leech).
+parent(arthur_leech, jack_leech).
+parent(arthur_leech, heather_leech).
+parent(jane_smith, timothy_leech).
+parent(jane_smith, jack_leech).
+parent(jane_smith, heather_leech).
+parent(robert_harris, evelyn_harris).
+parent(robert_harris, albert_harris).
+parent(julia_swift, evelyn_harris).
+parent(julia_swift, albert_harris).
+parent(albert_harris, june_harris).
+parent(albert_harris, jackie_harrie).
+parent(albert_harris, leonard_harris).
+parent(margaret_little, june_harris).
+parent(margaret_little, jackie_harrie).
+parent(margaret_little, leonard_harris).
+parent(leonard_harris, jennifer_harris).
+parent(leonard_harris, karen_harris).
+parent(leonard_harris, kenneth_harris).
+parent(constance_may, jennifer_harris).
+parent(constance_may, karen_harris).
+parent(constance_may, kenneth_harris).
+parent(beau_morris, layla_morris).
+parent(jennifer_willis, layla_morris).
+parent(willard_louis, jonathan_louis).
+parent(missy_deas, jonathan_louis).
+parent(jonathan_louis, tom_louis).
+parent(marsha_lang, tom_louis).
+parent(tom_louis, mary_louis).
+parent(tom_louis, jane_louis).
+parent(tom_louis, katie_louis).
+parent(catherine_thompson, mary_louis).
+parent(catherine_thompson, jane_louis).
+parent(catherine_thompson, katie_louis).
+
+
+
 parent_list([fred_smith, mary_jones],
             [tom_smith, lisa_smith, jane_smith, john_smith]).
 
