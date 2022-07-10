@@ -1,0 +1,184 @@
+---------------------------------------Test Cases---------------------------------------
+?- parent(fred_smith,Child).
+Child = tom_smith ;
+Child = lisa_smith ;
+Child = jane_smith ;
+Child = john_smith ;
+false.
+
+?- married(fred_smith,W).
+W = mary_jones .
+
+?- married(F,mary_jones).
+F = fred_smith .
+
+?- ancestor(john_smith,P).
+P = julie_smith ;
+P = leslie_smith ;
+P = heather_smith ;
+P = zach_smith ;
+false.
+
+?- descendent(john_smith,P).
+P = fred_smith ;
+P = mary_jones ;
+false.
+
+?- descendent(fred_smith,P).
+false.
+
+?- common_ancestor(tim_smith, jill_smith, A).
+A = freddy_smith ;
+A = connie_warrick ;
+A = tom_smith ;
+A = evelyn_harris ;
+A = fred_smith ;
+A = mary_jones ;
+A = robert_harris ;
+A = julia_swift ;
+false.
+
+?- blood(jack_leech,P).
+P = timothy_leech ;
+P = jack_leech ;
+P = heather_leech ;
+P = tom_smith ;
+P = lisa_smith ;
+P = jane_smith ;
+P = john_smith ;
+P = mark_smith ;
+P = freddy_smith ;
+P = joe_smith ;
+P = francis_smith ;
+P = joe_thompson ;
+P = catherine_thompson ;
+P = john_thompson ;
+P = carrie_thompson ;
+P = julie_smith ;
+P = leslie_smith ;
+P = heather_smith ;
+P = zach_smith ;
+P = martha_smith ;
+P = frederick_smith ;
+P = jill_smith ;
+P = marcus_smith ;
+P = tim_smith ;
+P = lilly_thompson ;
+P = richard_thompson ;
+P = marcus_thompson ;
+P = mary_louis ;
+P = jane_louis ;
+P = katie_louis ;
+P = arthur_leech ;
+P = fred_smith ;
+P = mary_jones ;
+P = jeremiah_leech ;
+P = sally_swithers ;
+false.
+
+?- uncle(U,leslie_smith).
+U = tom_smith ;
+U = leonard_thompson ;
+U = arthur_leech ;
+false.
+
+?- aunt(A,leslie_smith).
+A = evelyn_harris ;
+A = lisa_smith ;
+A = jane_smith ;
+false.
+
+?- cousin(tim_smith,C).
+C = joe_thompson ;
+C = catherine_thompson ;
+C = john_thompson ;
+C = carrie_thompson ;
+C = lilly_thompson ;
+C = richard_thompson ;
+C = marcus_thompson ;
+C = mary_louis ;
+C = jane_louis ;
+C = katie_louis ;
+C = timothy_leech ;
+C = jack_leech ;
+C = heather_leech ;
+C = julie_smith ;
+C = leslie_smith ;
+C = heather_smith ;
+C = zach_smith ;
+C = martha_smith ;
+C = frederick_smith ;
+;C = june_harris ;
+C = jackie_harrie ;
+C = leonard_harris ;
+C = jennifer_harris ;
+C = karen_harris ;
+C = kenneth_harris ;
+false.
+
+?- cousin_type(tim_smith,june_harris,D,R).
+D = R, R = 1 ;
+
+?- cousin_type(tim_smith,karen_harris,D,R).
+D = 2,
+R = 0 ;
+false.
+
+%It is ok to to include variable itself in the solution
+?- sibling(tim_smith,S).  
+S = jill_smith ;
+S = marcus_smith ;
+false.
+
+?- father(fred_smith,C).
+C = tom_smith ;
+C = lisa_smith ;
+C = jane_smith ;
+C = john_smith ;
+false.
+
+?- mother(mary_jones,C).
+C = tom_smith ;
+C = lisa_smith ;
+C = jane_smith ;
+C = john_smith ;
+false.
+
+
+---------------------------------------Rubric Below---------------------------------------
+parent(?Parent, ?Child). -5
+
+married(?Husband, ?Wife). -5
+
+ancestor(?Ancestor, ?Person). -5
+
+descendent(?Decendent, ?Person). -5
+
+common_ancestor(?Person1, ?Person2, ?Ancestor). -10
+
+blood(?Person1, ?Person2). -10
+
+sibling(?Person1, Person2). -10
+
+father(?Father, ?Child). -5
+
+mother(?Mother, ?Child). -5
+
+uncle(?Uncle, ?Person). -10
+
+aunt(?Aunt, ?Person). -10 
+
+cousin(?Cousin, ?Person). -10
+
+cousin_type(+Person1, +Person2, -CousinType, -Removed). -10
+
+If a predicate is reasonably written, 40%. If a predicate functions in the respective test case (does not produce error message), 60%. If a predicate produces some results in the respective test case, 80%. If a predicate produces correct results, 100%. If a predicate produces correct results but traps in an infinity recursion, 80%.
+
+Specifically,
+
+blood(jack_leech,P): the predicate has to return with, at least, every variable in leech and smith family or be same as the solution.
+
+uncle(U,leslie_smith) and aunt(A,leslie_smith): spouse needs to be counted as uncle or aunt.
+
+cousin(tim_smith,C): the predicate has to return with, at least, 12 distinctive correct results.
+
