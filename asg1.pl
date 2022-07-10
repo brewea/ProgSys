@@ -26,43 +26,62 @@ male(willard_louis).
 male(jonathan_louis).
 male(tom_louis).
 
-female(mary_jones);
-female(lisa_smith);
-female(jane_smith);
-female(evelyn_harris);
-female(pam_wilson);
-female(martha_smith);
-female(connie_warrick);
-female(jill_smith);
-female(layla_morris);
-female(leslie_smith);
-female(julie_smith);
-female(heather_smith);
-female(susan_holt);
-female(mary_thompson);
-female(list_smith);
-female(catherine_thompson);
-female(carrie_thompson);
-female(lisa_houser);
-female(lilly_thompson);
-female(sally_swithers);
-female(jane_smith);
-female(heather_leech);
-female(julia_swift);
-female(evelyn_harris);
-female(margaret_little);
-female(june_harris);
-female(jackie_harrie);
-female(constance_may);
-female(jennifer_harris);
-female(karen_harris);
-female(jennifer_willis);
-female(layla_morris);
-female(missy_deas);
-female(marsha_lang);
-female(mary_louis);
-female(jane_louis);
-female(katie_louis);
+female(mary_jones).
+female(lisa_smith).
+female(jane_smith).
+female(evelyn_harris).
+female(pam_wilson).
+female(martha_smith).
+female(connie_warrick).
+female(jill_smith).
+female(layla_morris).
+female(leslie_smith).
+female(julie_smith).
+female(heather_smith).
+female(susan_holt).
+female(mary_thompson).
+female(list_smith).
+female(catherine_thompson).
+female(carrie_thompson).
+female(lisa_houser).
+female(lilly_thompson).
+female(sally_swithers).
+female(jane_smith).
+female(heather_leech).
+female(julia_swift).
+female(evelyn_harris).
+female(margaret_little).
+female(june_harris).
+female(jackie_harrie).
+female(constance_may).
+female(jennifer_harris).
+female(karen_harris).
+female(jennifer_willis).
+female(layla_morris).
+female(missy_deas).
+female(marsha_lang).
+female(mary_louis).
+female(jane_louis).
+female(katie_louis).
+
+married(fred_smith, mary_jones).
+married(tom_smith, evelyn_harris).
+married(mark_smith, pam_wilson).
+married(freddy_smith, connie_warrick).
+married(john_smith, layla_morris).
+married(edward_thompson, susan_holt).
+married(leonard_thompson, list_smith).
+married(joe_thompson, lisa_houser).
+married(john_thompson, mary_snyder).
+married(jeremiah_leech, sally_swithers).
+married(arthur_leech, jane_smith).
+married(robert_harris, julia_swift).
+married(albert_harris, margaret_little).
+married(leonard_harris, constance_may).
+married(beau_morris, jennifer_willis).
+married(willard_louis, missy_deas).
+married(jonathan_louis, marsha_lang).
+married(tom_louis, catherine_thompson).
 
 parent(fred_smith, tom_smith).
 parent(fred_smith, lisa_smith).
@@ -152,8 +171,6 @@ parent(tom_louis, katie_louis).
 parent(catherine_thompson, mary_louis).
 parent(catherine_thompson, jane_louis).
 parent(catherine_thompson, katie_louis).
-
-
 
 parent_list([fred_smith, mary_jones],
             [tom_smith, lisa_smith, jane_smith, john_smith]).
