@@ -43,7 +43,7 @@ parent_list([john_smith, layla_morris],
 parent_list([edward_thompson, susan_holt],
             [leonard_thompson, mary_thompson]).
 
-parent_list([leonard_thompson, list_smith],
+parent_list([leonard_thompson, lisa_smith],
             [joe_thompson, catherine_thompson, john_thompson, carrie_thompson]).
 
 parent_list([joe_thompson, lisa_houser],
@@ -82,9 +82,9 @@ parent_list([tom_louis, catherine_thompson],
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SWE1 Assignment - Create rules for:
 
-% parent(?Parent, ?Child).
+% parent(?Parent, ?Child). DONE
 
-% married(?Husband, ?Wife).
+% married(?Husband, ?Wife). DONE
 
 % ancestor(?Ancestor, ?Person).
 
@@ -94,11 +94,11 @@ parent_list([tom_louis, catherine_thompson],
 
 % blood(?Person1, ?Person2). %% blood relative
 
-% sibling(?Person1, Person2).
+% sibling(?Person1, Person2). 
 
-% father(?Father, ?Child).
+% father(?Father, ?Child). DONE
 
-% mother(?Mother, ?Child).
+% mother(?Mother, ?Child). DONE
 
 % uncle(?Uncle, ?Person). %% 
 
