@@ -183,3 +183,9 @@ brother(M,N) :- parent(O,M), parent(O,N), male(M), M\==N.
 sibling(X,Y):- father(F,X),father(F,Y),
 				mother(M,X),mother(M,Y),
 				X\=Y, F\=M.
+grandmother(M,C):- female(M),mother(M,T), parent(T,C).
+grandfather(F,C):-male(F),father(F,T), parent(T,C).
+uncle(U,C):- male(U),brother(U,T), parent(T,C).
+aunt(A,C):- female(A),sister(A,T), parent(T,C).
+ancestor(X,Y):- parent(X,Y).
+ancestor(X,Y):- parent(X,T), ancestor(Z,T).
