@@ -264,6 +264,7 @@ brother(S1,S2) :- sibling(S1,S2) ,male(S1).
  *grandparent(X=GParent,Y=GChild) Z=Parent who has child and gparent
  */
 ancestor(GParent,GChild) :- parent(GParent,Parent) ,parent(Parent,GChild).
+ancestor(GParent,GChild) :- parent(GParent,Parent) ,ancestor(Parent,GChild).
 grandfather(GParent,GChild) :- ancestor(GParent,GChild) ,male(GParent).
 grandmother(GParent,GChild) :- ancestor(GParent,GChild) ,female(GParent).
 
