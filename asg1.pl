@@ -65,6 +65,12 @@ female(mary_louis).
 female(jane_louis).
 female(katie_louis).
 
+/* married(X=Husband,Y=Wife) */
+/* married(X=Husband,Y=Wife) 
+married(Husband,Wife) :- married(Wife,Husband).
+married(Husband,Wife) :- husband(Husband,Wife).
+married(Husband,Wife) :- wife(Husband,Wife).
+*/
 married(fred_smith, mary_jones).
 married(tom_smith, evelyn_harris).
 married(mark_smith, pam_wilson).
@@ -84,6 +90,14 @@ married(willard_louis, missy_deas).
 married(jonathan_louis, marsha_lang).
 married(tom_louis, catherine_thompson).
 
+/* parent(X=Parent,Y=Child) */
+/* parent(X=Parent,Y=Child) Z=Other Variable 
+parent(Parent,Child) :- child(Child,Parent).
+parent(Parent,Child) :- married(Parent,Z) ,parent(Z,Child).
+parent(Parent,Child) :- father(Parent,Child).
+parent(Parent,Child) :- mother(Parent,Child).
+parent(Parent,Child) :- parent(Parent,Z), sibling(Child,Z).
+*/
 parent(evelyn_harris, mark_smith).
 parent(evelyn_harris, freddy_smith).
 parent(evelyn_harris, joe_smith).
@@ -173,19 +187,144 @@ parent(tom_louis, mary_louis).
 parent(tom_louis, jane_louis).
 parent(tom_louis, katie_louis).
 
-/* RULES */
-mother(M,C):- female(M), parent(M,C).
-father(F,C):- male(F), parent(F,C).
-son(S,P):- male(S), father(P,S), mother(P,S).
-daughter(D,P):- female(D), father(P,D), mother(P,D).
-sister(M,N) :- parent(O,M), parent(O,N), female(M), M\==N.
-brother(M,N) :- parent(O,M), parent(O,N), male(M), M\==N.
-sibling(X,Y):- father(F,X),father(F,Y),
-				mother(M,X),mother(M,Y),
-				X\=Y, F\=M.
-grandmother(M,C):- female(M),mother(M,T), parent(T,C).
-grandfather(F,C):-male(F),father(F,T), parent(T,C).
-uncle(U,C):- male(U),brother(U,T), parent(T,C).
-aunt(A,C):- female(A),sister(A,T), parent(T,C).
-ancestor(X,Y):- parent(X,Y).
-ancestor(X,Y):- parent(X,T), ancestor(Z,T).
+/* RULES 
+Glossary
+Z = Random Variable
+S1 = Sibling 1
+S2 = Sibling 2
+P1 = Parent1
+P2 = Parent2
+
+*/
+
+distinct(Goal) :-
+    findall(Goal, Goal, List),
+    list_to_set(List, Set),
+    member(Goal, Set).
+
+
+
+
+/*A mother must be a parent and a female
+ *mother(X=Parent,Y=Child) Z=Other Variable Q=No Clue
+ */
+mother(Parent,Child):- female(Parent), parent(Parent,Child).
+
+/*A Wife must have a husband, be female, and be married
+ *wife(X=Wife,Y=Husband)
+ */
+/*wife(Wife,Husband) :- husband(Husband,Wife).*/
+wife(Wife,Husband) :- female(Wife) ,married(Husband,Wife).
+
+/*A father must be a parent and a male
+ *father(X=Parent,Y=Child) Z=Other Variable Q=No Clue
+ */
+father(Parent,Child):- male(Parent), parent(Parent,Child).
+
+/*A Husband must have a wife, be male, and be married
+ *husband(X=Husband,Y=Wife)
+ */
+/*husband(Husband,Wife) :- wife(Wife,Husband).*/
+husband(Husband,Wife) :- male(Husband) ,married(Husband,Wife).
+
+/*A child must have a parent, and can be either a son or daughter
+ *child(X=Child,Y=Parent) Z=Other Variable
+
+child(Child,Parent) :- parent(Parent,Child);child(Child,Parent). */
+child(Child,Parent) :- daughter(Child,Parent);son(Child,Parent).
+
+/*Siblings must share a parent and either be a brother or a sister
+ *sibling(X=S1,Y=S2) Z=Other Variable
+ */
+sibling(S1,S2) :- parent(Z,S1), parent(Z,S2), S1 \= S2.
+/*sibling(S1,S2) :- sibling(S2,S1).
+sibling(S1,S2) :- brother(S1,S2); sister(S1,S2).*/
+
+/*A daughter must have a parent, and be female
+ *daughter(X=Child,Y=Parent)
+ */
+daughter(Child,Parent):- female(Child), child(Child,Parent).
+
+/*A son must have a parent, and be male
+ *son(X=Child,Y=Parent)
+ */
+son(Child,Parent):- male(Child),  child(Child,Parent).
+
+/*A sister must have a sibling and must be female
+ *sister(X=S1,Y=S2)
+ */
+sister(S1,S2) :- sibling(S1,S2) ,female(S1).
+
+/*A brother must have a sibling and must be male
+ *brother(X=S1,Y=S2)
+ */
+brother(S1,S2) :- sibling(S1,S2) ,male(S1).
+
+/*An ancestor is someone who has a child who is a parent to a child
+ *grandparent(X=GParent,Y=GChild) Z=Parent who has child and gparent
+ */
+ancestor(GParent,GChild) :- parent(GParent,Parent) ,parent(Parent,GChild).
+grandfather(GParent,GChild) :- ancestor(GParent,GChild) ,male(GParent).
+grandmother(GParent,GChild) :- ancestor(GParent,GChild) ,female(GParent).
+
+/*A nephew must either have an aunt or an uncle and must be male
+ *nephew(X=Nephew,Y=Uncle or Aunt)
+ */
+nephew(Nephew,Aunt) :- aunt(Aunt,Nephew) ,male(Nephew).
+nephew(Nephew,Uncle) :- uncle(Uncle,Nephew) ,male(Nephew).
+
+/*A niece must either have an aunt or an uncle and must be female
+ *niece(X=Child,Y=Uncle or Aunt)
+ */
+niece(niece,Aunt) :- aunt(Aunt,niece) ,female(niece).
+niece(niece,Uncle) :- uncle(Uncle,niece) ,female(niece).
+
+/*An aunt has to have either a nepher or neice, a sibling that is a parent of
+ *another child, and must be a female
+ *aunt(X=Aunt,Y=Child) Z=Other variable
+ */
+aunt(Aunt,Child) :- nephew(Child,Aunt) ,female(Aunt).
+aunt(Aunt,Child) :- niece(Child,Aunt) ,female(Aunt).
+aunt(Aunt,Child) :- sibling(Aunt,Z) ,parent(Z,Child) ,female(Aunt).
+
+/*An uncle has to have either a nepher or neice, a sibling that is a parent of
+ *another child, and must be a male
+ *uncle(X=Uncle,Y=Child) Z=Other Variable
+ */
+uncle(Uncle,Child) :- married(Uncle,Z) ,aunt(Z,Child).
+uncle(Uncle,Child) :- nephew(Child,Uncle) ,male(Uncle).
+uncle(Uncle,Child) :- niece(Child,Uncle) ,male(Uncle).
+uncle(Uncle,Child) :- sibling(Uncle,Z) ,parent(Z,Child) ,male(Uncle).
+
+/*A cousin is related through its parent and either an aunt, nephew, uncle, or
+ *niece
+ *cousin(X=Cousin 1,Y=Cousin 2) Z=Other variable 
+*/
+cousin(C1,C2) :- cousin(C2,C1).
+cousin(C1,C2) :- parent(Z,C1) ,aunt(Z,C2).
+cousin(C1,C2) :- parent(Z,C1) ,uncle(Z,C2).
+cousin(C1,C2) :- parent(Z,C1) ,nephew(C2,Z).
+cousin(C1,C2) :- parent(Z,C1) ,niece(C2,Z).
+
+/*Blood relatives must be related through parents individualy, uncles and aunts from each side, nieces and nephews from each side.
+ *cousins
+ *blood(X=Person1, Y=Person2)
+*/ 
+blood(Person1,Person2):- parent(Z,Person1), parent(Z,Person2).
+blood(Person1,Person2):- sibling(Z,Person1), sibling(Z,Person2).
+blood(Person1,Person2):- uncle(Z,Person1), uncle(Z,Person2).
+blood(Person1,Person2):- aunt(Z,Person1), aunt(Z,Person2).
+blood(Person1,Person2):- ancestor(Z,Person1), ancestor(Z,Person2).
+blood(Person1,Person2):- niece(Z,Person1), niece(Z,Person2).
+blood(Person1,Person2):- nephew(Z,Person1), nephew(Z,Person2).
+
+
+
+mother_in_law(Parent,Z) :- mother(Parent,Q) ,married(Q,Z).
+fatherInLaw(Parent,Z) :- father(Parent,Q) ,married(Q,Z).
+son_in_law(X,Z) :- married(X,Y) ,daughter(Y,Z).
+daughter_in_law(X,Z) :- married(X,Y) ,son(Y,Z).
+brother_in_law(X,Z) :- brother(X,Y) ,married(Y,Z).
+brother_in_law(X,Z) :- husband(X,Y) ,sibling(Y,Z).
+sister_in_law(S1,Parent) :- sister(S1,Y) ,married(Y,Parent).
+sister_in_law(X,Z) :- wife(X,Y) ,sibling(Y,Z).
